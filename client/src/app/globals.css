@@ -1,0 +1,34 @@
+@import "tailwindcss";
+
+:root {
+  --background: #ffffff;
+  --foreground: #1a1220;
+  --brand: #ec130e;
+  --brand-hover: #c80f0b;
+  --lime: #93c029;
+  --lime-dark: #6f9418;
+  --purple: #782b90;
+  --purple-dark: #1b1024;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-brand: var(--brand);
+  --color-brand-hover: var(--brand-hover);
+  --color-lime: var(--lime);
+  --color-lime-dark: var(--lime-dark);
+  --color-purple: var(--purple);
+  --color-purple-dark: var(--purple-dark);
+  --font-sans: var(--font-hind-siliguri), var(--font-inter), sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+}
