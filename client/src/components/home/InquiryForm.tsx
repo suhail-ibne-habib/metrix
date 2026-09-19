@@ -1,7 +1,7 @@
 "use client";
 
 import { FormEvent, useState } from "react";
-import { courses } from "@/data/home";
+import { programs } from "@/data/home";
 import { Button } from "@/components/ui/Button";
 import { Section } from "@/components/ui/Section";
 import { SectionHeading } from "@/components/ui/SectionHeading";
@@ -18,16 +18,16 @@ export function InquiryForm() {
   }
 
   return (
-    <Section id="inquiry" className="bg-slate-50/70">
+    <Section id="inquiry">
       <SectionHeading
-        eyebrow="Have a question?"
-        title="ম্যাট্রিক্স পয়েন্ট সম্পর্কে জানতে চান"
-        subtitle="ফর্মটি পূরণ করুন, আমরা দ্রুত আপনার সাথে যোগাযোগ করব"
+        eyebrow="Get in touch"
+        title="যোগাযোগ করুন"
+        subtitle="ব্যাচ, বই বা কাউন্সেলিং নিয়ে জানতে ফর্মটি পূরণ করুন"
       />
 
       <form
         onSubmit={handleSubmit}
-        className="mx-auto max-w-xl space-y-3 rounded-3xl border border-slate-100 bg-white p-6 sm:p-8"
+        className="mx-auto max-w-3xl rounded-3xl border border-slate-100 bg-white p-6 sm:p-8"
       >
         {submitted ? (
           <p className="rounded-2xl bg-emerald-50 px-4 py-6 text-center text-sm text-emerald-700">
@@ -35,43 +35,55 @@ export function InquiryForm() {
           </p>
         ) : (
           <>
-            <input
-              name="name"
-              required
-              placeholder="পূর্ণ নাম / Full name"
-              className={fieldClass}
-            />
-            <input
-              name="phone"
-              required
-              type="tel"
-              placeholder="মোবাইল নম্বর / Phone"
-              className={fieldClass}
-            />
-            <input
-              name="email"
-              type="email"
-              placeholder="ইমেইল / Email"
-              className={fieldClass}
-            />
-            <select name="course" required defaultValue="" className={fieldClass}>
-              <option value="" disabled>
-                কোর্স / বিষয় বেছে নিন
-              </option>
-              {courses.map((course) => (
-                <option key={course.id} value={course.id}>
-                  {course.title}
+            <div className="grid gap-3 sm:grid-cols-2">
+              <input
+                name="name"
+                required
+                placeholder="পূর্ণ নাম / Full name"
+                className={fieldClass}
+              />
+              <input
+                name="email"
+                type="email"
+                placeholder="ইমেইল / Email"
+                className={fieldClass}
+              />
+              <input
+                name="phone"
+                required
+                type="tel"
+                placeholder="মোবাইল নম্বর / Phone"
+                className={fieldClass}
+              />
+              <select name="course" required defaultValue="" className={fieldClass}>
+                <option value="" disabled>
+                  ব্যাচ / কোর্স বেছে নিন
                 </option>
-              ))}
-            </select>
-            <textarea
-              name="message"
-              rows={4}
-              placeholder="আপনার প্রশ্ন লিখুন / Your message"
-              className={`${fieldClass} resize-none`}
-            />
-            <div className="pt-2 text-center">
-              <Button type="submit" size="lg" className="min-w-40">
+                {programs.map((program) => (
+                  <option key={program.id} value={program.id}>
+                    {program.title}
+                  </option>
+                ))}
+              </select>
+              <input
+                name="city"
+                placeholder="শহর / City"
+                className={fieldClass}
+              />
+              <input
+                name="batch"
+                placeholder="বর্তমান স্ট্যাটাস / MBBS, Intern..."
+                className={fieldClass}
+              />
+              <textarea
+                name="message"
+                rows={4}
+                placeholder="আপনার প্রশ্ন লিখুন / Your message"
+                className={`${fieldClass} resize-none sm:col-span-2`}
+              />
+            </div>
+            <div className="pt-5">
+              <Button type="submit" size="lg">
                 Submit now
               </Button>
             </div>

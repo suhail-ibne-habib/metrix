@@ -1,19 +1,19 @@
-import { courses } from "@/data/home";
+import { programs } from "@/data/home";
 import { Section } from "@/components/ui/Section";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { CourseCard } from "./CourseCard";
 
 export function CourseGrid() {
   return (
-    <Section id="courses" className="bg-slate-50/70">
+    <Section id="courses" className="bg-[#f7f8fb]">
       <SectionHeading
-        eyebrow="Choose your program"
-        title="আপনার কাঙ্ক্ষিত কোর্স খুঁজে নিন"
-        subtitle="যে লক্ষ্যে এগোচ্ছেন, সেই প্রোগ্রামটি বেছে নিন"
+        eyebrow="Upcoming batches"
+        title="আপনার যাত্রা শুরু করুন"
+        subtitle="বিষয় বেছে নিন, ব্যাচে জয়েন করুন"
       />
-      <div className="grid gap-4 sm:grid-cols-2 md:grid-cols-4">
-        {courses.map(({ id, ...course }) => (
-          <CourseCard key={id} {...course} />
+      <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+        {programs.map(({ id, ...program }) => (
+          <CourseCard key={id} {...program} />
         ))}
       </div>
     </Section>

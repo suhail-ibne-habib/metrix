@@ -3,96 +3,205 @@ export const navLinks = [
   { href: "#courses", label: "Courses" },
   { href: "#features", label: "About" },
   { href: "#inquiry", label: "Blog" },
-  { href: "#contact", label: "Contact" },
+    { href: "#inquiry", label: "Contact" },
 ] as const;
 
 export const hero = {
-  title: "ম্যাট্রিক্স পয়েন্ট পরিবারে আপনাকে স্বাগতম!",
+  badge: "New Batch Open",
+  title: "আপনার কাঙ্ক্ষিত পোস্ট-গ্র্যাজুয়েট মেডিকেল ক্যারিয়ার নিশ্চিত করুন",
   subtitle:
-    "লাইভ ক্লাস, রেকর্ডেড লেকচার ও পরীক্ষামুখী গাইডলাইনের মাধ্যমে আপনার পোস্ট-গ্র্যাজুয়েশন যাত্রাকে করে তুলুন আরও নিশ্চিত।",
-  cta: "Login / Register",
+    "FCPS, Residency ও ডিপ্লোমা প্রস্তুতিকে গুছিয়ে নিন লাইভ ক্লাস, কি-নোটস ও এক্সাম-ফোকাসড Q-Bank দিয়ে।",
+  cta: "Join The Batch",
   stats: [
-    { value: "50,000+", label: "শিক্ষার্থী" },
-    { value: "200+", label: "শিক্ষক" },
-    { value: "20+", label: "বছর" },
+    { value: "12,000+", label: "Successful Students" },
+    { value: "85%", label: "Exam Success" },
+    { value: "48", label: "Expert Faculty" },
   ],
+  highlight: {
+    eyebrow: "FCPS Part I",
+    title: "Medicine Batch",
+    date: "Starts 12 Oct",
+  },
 } as const;
 
-export const courses: Array<{
+export type ProgramTone = "red" | "navy" | "purple" | "pink" | "teal" | "lime";
+
+export const programs: Array<{
+  id: string;
+  badge: string;
+  title: string;
+  points: string[];
+  tone: ProgramTone;
+}> = [
+  {
+    id: "medicine",
+    badge: "FCPS Part I",
+    title: "Medicine",
+    points: ["Live + recorded classes", "Weekly model tests", "Key notes & SBA drill"],
+    tone: "red",
+  },
+  {
+    id: "surgery",
+    badge: "FCPS Part I",
+    title: "Surgery",
+    points: ["Bailey-focused lectures", "Long & short case prep", "OSPE revision"],
+    tone: "navy",
+  },
+  {
+    id: "radiology",
+    badge: "FCPS / MD",
+    title: "Radiology",
+    points: ["Imaging Q-bank", "Spot diagnosis drills", "Written + viva track"],
+    tone: "purple",
+  },
+  {
+    id: "gynae",
+    badge: "FCPS Part I",
+    title: "Gynae & Obs",
+    points: ["Dutta-based notes", "SBA & recall classes", "Residency guidance"],
+    tone: "pink",
+  },
+  {
+    id: "paediatrics",
+    badge: "FCPS Part I",
+    title: "Paediatrics",
+    points: ["High-yield topics", "Case discussion", "Exam-oriented notes"],
+    tone: "teal",
+  },
+  {
+    id: "anaesthesia",
+    badge: "FCPS Part I",
+    title: "Anaesthesia",
+    points: ["Clinical question bank", "Viva station practice", "Mentor support"],
+    tone: "lime",
+  },
+];
+
+export const courses = programs;
+
+export const books: Array<{
   id: string;
   title: string;
-  subtitle: string;
+  author: string;
+  price: string;
   cover: string;
-  featured?: boolean;
 }> = [
   {
     id: "davidson",
     title: "Davidson Zero Hour",
-    subtitle: "Question Bank · 5 Volumes",
+    author: "Question Bank · 5 Volumes",
+    price: "৳ 2,500",
     cover: "/courses/davidson.jpeg",
-    featured: true,
   },
   {
     id: "bailey-loves",
     title: "Bailey & Love's",
-    subtitle: "FCPS Part-I Surgery",
+    author: "FCPS Part-I Surgery",
+    price: "৳ 2,500",
     cover: "/courses/bailey-loves.jpeg",
   },
   {
     id: "gynae-obs",
     title: "Gynae & Obs",
-    subtitle: "Dutta · FCPS Part-I",
+    author: "Dutta · FCPS Part-I",
+    price: "৳ 1,800",
     cover: "/courses/gynae-obs.jpeg",
   },
   {
     id: "digest-key-notes",
     title: "Digest, Key Note & Q.Bank",
-    subtitle: "FCPS Part-I · Residency",
+    author: "FCPS Part-I · Residency",
+    price: "৳ 1,750",
     cover: "/courses/digest-key-notes.jpeg",
   },
   {
     id: "radiology",
     title: "Radiology & Imaging",
-    subtitle: "Question Bank · Vol 1–2",
+    author: "Question Bank · Vol 1–2",
+    price: "৳ 1,100",
     cover: "/courses/radiology.jpeg",
   },
   {
     id: "ophthalmology",
     title: "Ophthalmology",
-    subtitle: "Question Bank · Vol 1–2",
+    author: "Question Bank · Vol 1–2",
+    price: "৳ 1,200",
     cover: "/courses/ophthalmology.jpeg",
   },
   {
     id: "pathology",
     title: "Pathology",
-    subtitle: "Histopathology · FCPS Part-I",
+    author: "Histopathology · FCPS Part-I",
+    price: "৳ 1,100",
     cover: "/courses/pathology.jpeg",
   },
   {
     id: "microbiology",
     title: "Microbiology",
-    subtitle: "Question Bank · Vol 1–2",
+    author: "Question Bank · Vol 1–2",
+    price: "৳ 1,000",
     cover: "/courses/microbiology.jpeg",
   },
-  {
-    id: "dermatology",
-    title: "Dermatology",
-    subtitle: "Zero Hour Digest · FCPS Part-I",
-    cover: "/courses/dermatology.jpeg",
-  },
-  {
-    id: "anesthesiology",
-    title: "Clinical Anesthesiology",
-    subtitle: "FCPS Part-I · Vol 1–2",
-    cover: "/courses/anesthesiology.jpeg",
-  },
-  {
-    id: "sba",
-    title: "SBA Question Bank",
-    subtitle: "Residency · Non-Residency · FCPS P-I",
-    cover: "/courses/sba.jpeg",
-  },
 ];
+
+export const features = [
+  {
+    id: "live",
+    title: "Live Interactive Classes",
+    description: "প্রতিদিনের গাইডেড সেশনে প্রশ্ন করুন এবং সাথে সাথে ক্লিয়ার করুন।",
+    tone: "red",
+  },
+  {
+    id: "recorded",
+    title: "HD Recorded Lectures",
+    description: "মিস হলেও যেকোনো সময় রিভিশন করুন, যতবার দরকার।",
+    tone: "lime",
+  },
+  {
+    id: "notes",
+    title: "Exam-Focused Notes",
+    description: "কি-টপিক, রিকল ও হাই-ইল্ড নোটস এক জায়গায়।",
+    tone: "purple",
+  },
+  {
+    id: "mentor",
+    title: "Mentor Support",
+    description: "ব্যাচ, বিষয় ও ক্যারিয়ার গাইডলাইনে সরাসরি পরামর্শ।",
+    tone: "teal",
+  },
+] as const;
+
+export const faculty = [
+  { id: "rahman", name: "Dr. A. Rahman", role: "Medicine", initial: "AR" },
+  { id: "hasan", name: "Dr. S. Hasan", role: "Surgery", initial: "SH" },
+  { id: "akter", name: "Dr. N. Akter", role: "Gynae & Obs", initial: "NA" },
+  { id: "chowdhury", name: "Dr. T. Chowdhury", role: "Radiology", initial: "TC" },
+  { id: "islam", name: "Dr. F. Islam", role: "Paediatrics", initial: "FI" },
+] as const;
+
+export const testimonials = [
+  {
+    id: "nabila",
+    quote:
+      "মেডিসিন ব্যাচের স্ট্রাকচার আর সাপ্তাহিক টেস্ট আমাকে FCPS Part-I তে কনফিডেন্ট রেখেছে।",
+    name: "Dr. Nabila Hossain",
+    batch: "Medicine Batch '25",
+  },
+  {
+    id: "imran",
+    quote:
+      "Bailey ক্লাস আর Q-Bank একসাথে পাওয়ায় সার্জারি প্রস্তুতি অনেক ফোকাসড হয়ে গেছে।",
+    name: "Dr. Imran Kabir",
+    batch: "Surgery Batch '25",
+  },
+  {
+    id: "farzana",
+    quote:
+      "মেন্টর সাপোর্ট আর রেকর্ডেড লেকচার ডিউটির ফাঁকেও রিভিশন চালিয়ে যেতে সাহায্য করেছে।",
+    name: "Dr. Farzana Akter",
+    batch: "Gynae Batch '24",
+  },
+] as const;
 
 export const promoBanners = [
   {
@@ -127,15 +236,6 @@ export const promoBanners = [
     cta: "Start Course",
     tone: "peach",
   },
-] as const;
-
-export const features = [
-  { id: "live", title: "Live Classes", description: "প্রতিদিনের গাইডেড সেশন", tone: "red" },
-  { id: "recorded", title: "Recorded", description: "যেকোনো সময় রিভিশন", tone: "lime" },
-  { id: "notes", title: "Lecture Notes", description: "পরীক্ষামুখী নোটস", tone: "purple" },
-  { id: "exams", title: "Model Tests", description: "নিয়মিত মূল্যায়ন", tone: "orange" },
-  { id: "mentor", title: "Mentor Support", description: "সরাসরি পরামর্শ", tone: "violet" },
-  { id: "community", title: "Community", description: "সহপাঠীদের সাথে এগোন", tone: "pink" },
 ] as const;
 
 export const branches = [
@@ -195,7 +295,7 @@ export const footer = {
     { href: "#features", label: "About" },
     { href: "#courses", label: "Courses" },
     { href: "#inquiry", label: "Admission" },
-    { href: "#contact", label: "Contact" },
+    { href: "#inquiry", label: "Contact" },
   ],
   phone: "+880 1404-432536",
   email: "info@matrixpoint.edu",

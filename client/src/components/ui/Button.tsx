@@ -7,7 +7,7 @@ const variants = {
   outline:
     "border border-slate-200 bg-white text-slate-700 hover:border-brand/30 hover:text-brand",
   light: "bg-white/95 text-brand hover:bg-white",
-  ghost: "text-slate-600 hover:bg-slate-50 hover:text-slate-900",
+  dark: "bg-slate-900 text-white hover:bg-slate-800",
 };
 
 const sizes = {

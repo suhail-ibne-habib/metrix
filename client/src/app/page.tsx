@@ -1,19 +1,21 @@
-import { ContactBranches } from "@/components/home/ContactBranches";
+import { BookGrid } from "@/components/home/BookGrid";
 import { CourseGrid } from "@/components/home/CourseGrid";
+import { Faculty } from "@/components/home/Faculty";
 import { Hero } from "@/components/home/Hero";
 import { InquiryForm } from "@/components/home/InquiryForm";
-import { PromoBanners } from "@/components/home/PromoBanners";
 import { SuccessFeatures } from "@/components/home/SuccessFeatures";
+import { Testimonials } from "@/components/home/Testimonials";
 
 export default function Home() {
   return (
     <main>
       <Hero />
       <CourseGrid />
-      <PromoBanners />
+      <BookGrid />
       <SuccessFeatures />
+      <Faculty />
+      <Testimonials />
       <InquiryForm />
-      <ContactBranches />
     </main>
   );
 }
