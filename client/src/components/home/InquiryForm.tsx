@@ -7,7 +7,7 @@ import { Section } from "@/components/ui/Section";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 
 const fieldClass =
-  "w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-800 outline-none transition-shadow placeholder:text-slate-400 focus:border-brand/40 focus:shadow-[0_0_0_4px_rgba(236,19,14,0.08)]";
+  "w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-800 outline-none transition-shadow placeholder:text-slate-400 focus:border-forest/40 focus:shadow-[0_0_0_4px_rgba(26,71,53,0.08)]";
 
 export function InquiryForm() {
   const [submitted, setSubmitted] = useState(false);
@@ -18,19 +18,18 @@ export function InquiryForm() {
   }
 
   return (
-    <Section id="inquiry">
+    <Section id="inquiry" className="bg-cream">
       <SectionHeading
-        eyebrow="Get in touch"
-        title="যোগাযোগ করুন"
+        title="How to apply for a batch?"
         subtitle="ব্যাচ, বই বা কাউন্সেলিং নিয়ে জানতে ফর্মটি পূরণ করুন"
       />
 
       <form
         onSubmit={handleSubmit}
-        className="mx-auto max-w-3xl rounded-3xl border border-slate-100 bg-white p-6 sm:p-8"
+        className="mx-auto max-w-3xl rounded-2xl bg-white p-6 shadow-[0_12px_40px_rgba(15,23,42,0.08)] ring-1 ring-slate-100 sm:p-8"
       >
         {submitted ? (
-          <p className="rounded-2xl bg-emerald-50 px-4 py-6 text-center text-sm text-emerald-700">
+          <p className="rounded-2xl bg-mint px-4 py-6 text-center text-sm text-forest">
             ধন্যবাদ। আপনার অনুরোধটি গ্রহণ করা হয়েছে। শিগগিরই যোগাযোগ করা হবে।
           </p>
         ) : (
@@ -82,7 +81,7 @@ export function InquiryForm() {
                 className={`${fieldClass} resize-none sm:col-span-2`}
               />
             </div>
-            <div className="pt-5">
+            <div className="pt-6">
               <Button type="submit" size="lg">
                 Submit now
               </Button>

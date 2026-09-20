@@ -1,14 +1,24 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #1a1220;
+  --background: #e7f3eb;
+  --foreground: #16352c;
   --brand: #ec130e;
   --brand-hover: #c80f0b;
   --lime: #93c029;
   --lime-dark: #6f9418;
   --purple: #782b90;
   --purple-dark: #1b1024;
+  --forest: #1a4735;
+  --forest-hover: #133628;
+  --forest-deep: #0e2a22;
+  --mint: #e7f3eb;
+  --mint-deep: #d4eadc;
+  --cream: #f6f1e6;
+  --sage: #cfe5d6;
+  --gold: #f0a202;
+  --gold-hover: #d99202;
+  --surface: #f6f8fb;
 }
 
 @theme inline {
@@ -20,7 +30,21 @@
   --color-lime-dark: var(--lime-dark);
   --color-purple: var(--purple);
   --color-purple-dark: var(--purple-dark);
+  --color-forest: var(--forest);
+  --color-forest-hover: var(--forest-hover);
+  --color-forest-deep: var(--forest-deep);
+  --color-mint: var(--mint);
+  --color-mint-deep: var(--mint-deep);
+  --color-cream: var(--cream);
+  --color-sage: var(--sage);
+  --color-gold: var(--gold);
+  --color-gold-hover: var(--gold-hover);
+  --color-surface: var(--surface);
   --font-sans: var(--font-hind-siliguri), var(--font-inter), sans-serif;
+  --shadow-depth: 0 1px 1px rgb(16 52 40 / 0.04),
+    0 14px 32px -14px rgb(16 52 40 / 0.22),
+    0 32px 64px -28px rgb(16 52 40 / 0.18);
+  --shadow-float: 0 20px 50px -18px rgb(16 52 40 / 0.32);
 }
 
 html {

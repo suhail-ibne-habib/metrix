@@ -1,19 +1,25 @@
-import { books } from "@/data/home";
+import { bookSeries } from "@/data/home";
 import { Section } from "@/components/ui/Section";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { BookCard } from "./BookCard";
 
 export function BookGrid() {
   return (
-    <Section id="books">
+    <Section id="books" className="bg-cream">
       <SectionHeading
-        eyebrow="Study pack"
-        title="High-Yield Medical Books & Q-Banks"
-        subtitle="Zero Hour series, lecture sheets and exam-focused question banks"
+        title="High-yield books & Q-banks"
+        subtitle="Each title is a series — open it to see every volume"
       />
       <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-        {books.map(({ id, ...book }) => (
-          <BookCard key={id} {...book} />
+        {bookSeries.map((series) => (
+          <BookCard
+            key={series.id}
+            title={series.title}
+            subtitle={series.subtitle}
+            cover={series.cover}
+            href={`/books/${series.id}`}
+            cta="View series"
+          />
         ))}
       </div>
     </Section>

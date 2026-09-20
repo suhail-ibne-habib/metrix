@@ -3,11 +3,12 @@ import { cn } from "@/lib/cn";
 
 const variants = {
   primary:
-    "bg-brand text-white shadow-sm shadow-brand/25 hover:bg-brand-hover",
+    "bg-forest text-white shadow-[0_12px_24px_-10px_rgba(26,71,53,0.55)] hover:bg-forest-hover",
   outline:
-    "border border-slate-200 bg-white text-slate-700 hover:border-brand/30 hover:text-brand",
-  light: "bg-white/95 text-brand hover:bg-white",
-  dark: "bg-slate-900 text-white hover:bg-slate-800",
+    "border border-slate-200 bg-white text-slate-700 hover:border-forest/30 hover:text-forest",
+  light: "bg-white/95 text-forest hover:bg-white",
+  dark: "bg-forest text-white shadow-[0_10px_20px_-10px_rgba(26,71,53,0.5)] hover:bg-forest-hover",
+  gold: "bg-gold text-white shadow-[0_10px_20px_-10px_rgba(240,162,2,0.55)] hover:bg-gold-hover",
 };
 
 const sizes = {
@@ -40,6 +41,14 @@ export function Button({
   );
 
   if (href) {
+    if (href.startsWith("#")) {
+      return (
+        <a href={href} className={classes}>
+          {children}
+        </a>
+      );
+    }
+
     return (
       <Link href={href} className={classes}>
         {children}

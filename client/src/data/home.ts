@@ -8,19 +8,23 @@ export const navLinks = [
 
 export const hero = {
   badge: "New Batch Open",
-  title: "আপনার কাঙ্ক্ষিত পোস্ট-গ্র্যাজুয়েট মেডিকেল ক্যারিয়ার নিশ্চিত করুন",
+  titleBefore: "আপনার কাঙ্ক্ষিত ",
+  titleAccent: "পোস্ট-গ্র্যাজুয়েট",
+  titleAfter: " মেডিকেল ক্যারিয়ার নিশ্চিত করুন",
   subtitle:
     "FCPS, Residency ও ডিপ্লোমা প্রস্তুতিকে গুছিয়ে নিন লাইভ ক্লাস, কি-নোটস ও এক্সাম-ফোকাসড Q-Bank দিয়ে।",
   cta: "Join The Batch",
+  ctaSecondary: "Browse Books",
   stats: [
     { value: "12,000+", label: "Successful Students" },
-    { value: "85%", label: "Exam Success" },
-    { value: "48", label: "Expert Faculty" },
+    { value: "91%", label: "Exam Success" },
+    { value: "40", label: "Expert Faculty" },
   ],
   highlight: {
     eyebrow: "FCPS Part I",
     title: "Medicine Batch",
     date: "Starts 12 Oct",
+    points: ["Live + recorded classes", "Weekly model tests", "Mentor support"],
   },
 } as const;
 
@@ -79,70 +83,122 @@ export const programs: Array<{
 
 export const courses = programs;
 
-export const books: Array<{
+export type BookVolume = {
   id: string;
   title: string;
-  author: string;
+  subtitle: string;
   price: string;
   cover: string;
-}> = [
+};
+
+export type BookSeries = {
+  id: string;
+  title: string;
+  subtitle: string;
+  cover: string;
+  volumes: BookVolume[];
+};
+
+function volumeSet(
+  seriesId: string,
+  cover: string,
+  count: number,
+  price: string,
+  name: string,
+): BookVolume[] {
+  return Array.from({ length: count }, (_, index) => ({
+    id: `${seriesId}-vol-${index + 1}`,
+    title: `${name} · Vol ${index + 1}`,
+    subtitle: `Question Bank`,
+    price,
+    cover,
+  }));
+}
+
+export const bookSeries: BookSeries[] = [
   {
     id: "davidson",
     title: "Davidson Zero Hour",
-    author: "Question Bank · 5 Volumes",
-    price: "৳ 2,500",
+    subtitle: "Question Bank · 5 Volumes",
     cover: "/courses/davidson.jpeg",
+    volumes: volumeSet("davidson", "/courses/davidson.jpeg", 5, "৳ 550", "Davidson Zero Hour"),
   },
   {
     id: "bailey-loves",
     title: "Bailey & Love's",
-    author: "FCPS Part-I Surgery",
-    price: "৳ 2,500",
+    subtitle: "FCPS Part-I Surgery · 3 Volumes",
     cover: "/courses/bailey-loves.jpeg",
+    volumes: volumeSet("bailey-loves", "/courses/bailey-loves.jpeg", 3, "৳ 850", "Bailey & Love's"),
   },
   {
     id: "gynae-obs",
     title: "Gynae & Obs",
-    author: "Dutta · FCPS Part-I",
-    price: "৳ 1,800",
+    subtitle: "Dutta · FCPS Part-I · 2 Volumes",
     cover: "/courses/gynae-obs.jpeg",
+    volumes: volumeSet("gynae-obs", "/courses/gynae-obs.jpeg", 2, "৳ 900", "Gynae & Obs"),
   },
   {
     id: "digest-key-notes",
     title: "Digest, Key Note & Q.Bank",
-    author: "FCPS Part-I · Residency",
-    price: "৳ 1,750",
+    subtitle: "FCPS Part-I · Residency · 3 books",
     cover: "/courses/digest-key-notes.jpeg",
+    volumes: [
+      {
+        id: "digest",
+        title: "Digest",
+        subtitle: "FCPS Part-I · Residency",
+        price: "৳ 650",
+        cover: "/courses/digest-key-notes.jpeg",
+      },
+      {
+        id: "key-notes",
+        title: "Key Notes",
+        subtitle: "FCPS Part-I · Residency",
+        price: "৳ 650",
+        cover: "/courses/digest-key-notes.jpeg",
+      },
+      {
+        id: "q-bank",
+        title: "Q.Bank",
+        subtitle: "FCPS Part-I · Residency",
+        price: "৳ 650",
+        cover: "/courses/digest-key-notes.jpeg",
+      },
+    ],
   },
   {
     id: "radiology",
     title: "Radiology & Imaging",
-    author: "Question Bank · Vol 1–2",
-    price: "৳ 1,100",
+    subtitle: "Question Bank · 2 Volumes",
     cover: "/courses/radiology.jpeg",
+    volumes: volumeSet("radiology", "/courses/radiology.jpeg", 2, "৳ 550", "Radiology & Imaging"),
   },
   {
     id: "ophthalmology",
     title: "Ophthalmology",
-    author: "Question Bank · Vol 1–2",
-    price: "৳ 1,200",
+    subtitle: "Question Bank · 2 Volumes",
     cover: "/courses/ophthalmology.jpeg",
+    volumes: volumeSet("ophthalmology", "/courses/ophthalmology.jpeg", 2, "৳ 600", "Ophthalmology"),
   },
   {
     id: "pathology",
     title: "Pathology",
-    author: "Histopathology · FCPS Part-I",
-    price: "৳ 1,100",
+    subtitle: "Histopathology · FCPS Part-I · 2 Volumes",
     cover: "/courses/pathology.jpeg",
+    volumes: volumeSet("pathology", "/courses/pathology.jpeg", 2, "৳ 550", "Pathology"),
   },
   {
     id: "microbiology",
     title: "Microbiology",
-    author: "Question Bank · Vol 1–2",
-    price: "৳ 1,000",
+    subtitle: "Question Bank · 2 Volumes",
     cover: "/courses/microbiology.jpeg",
+    volumes: volumeSet("microbiology", "/courses/microbiology.jpeg", 2, "৳ 500", "Microbiology"),
   },
 ];
+
+export function getBookSeries(id: string) {
+  return bookSeries.find((series) => series.id === id);
+}
 
 export const features = [
   {
@@ -171,12 +227,11 @@ export const features = [
   },
 ] as const;
 
-export const faculty = [
-  { id: "rahman", name: "Dr. A. Rahman", role: "Medicine", initial: "AR" },
-  { id: "hasan", name: "Dr. S. Hasan", role: "Surgery", initial: "SH" },
-  { id: "akter", name: "Dr. N. Akter", role: "Gynae & Obs", initial: "NA" },
-  { id: "chowdhury", name: "Dr. T. Chowdhury", role: "Radiology", initial: "TC" },
-  { id: "islam", name: "Dr. F. Islam", role: "Paediatrics", initial: "FI" },
+export const whyPoints = [
+  "Live + recorded classes in one batch",
+  "Exam-focused notes and weekly tests",
+  "Mentor support for FCPS and residency",
+  "High-yield books and Q-banks on campus",
 ] as const;
 
 export const testimonials = [

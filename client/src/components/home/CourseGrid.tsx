@@ -5,15 +5,14 @@ import { CourseCard } from "./CourseCard";
 
 export function CourseGrid() {
   return (
-    <Section id="courses" className="bg-[#f7f8fb]">
+    <Section id="courses" className="bg-sage">
       <SectionHeading
-        eyebrow="Upcoming batches"
-        title="আপনার যাত্রা শুরু করুন"
+        title="We provide batches for"
         subtitle="বিষয় বেছে নিন, ব্যাচে জয়েন করুন"
       />
       <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-        {programs.map(({ id, ...program }) => (
-          <CourseCard key={id} {...program} />
+        {programs.map((program) => (
+          <CourseCard key={program.id} {...program} />
         ))}
       </div>
     </Section>
