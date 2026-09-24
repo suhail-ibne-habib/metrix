@@ -38,7 +38,7 @@ export default async function BookSeriesPage({ params }: SeriesPageProps) {
     <main className="bg-mint">
       <Container className="py-16 sm:py-20">
         <Link
-          href="/#books"
+          href="/books"
           className="text-sm font-medium text-forest hover:text-lime-dark"
         >
           ← All series
@@ -55,9 +55,8 @@ export default async function BookSeriesPage({ params }: SeriesPageProps) {
               title={volume.title}
               subtitle={volume.subtitle}
               cover={volume.cover}
-              price={volume.price}
-              href="/#inquiry"
-              cta="Buy Now"
+              href={`/books/${series.id}/${volume.id}`}
+              cta="View details"
             />
           ))}
         </div>

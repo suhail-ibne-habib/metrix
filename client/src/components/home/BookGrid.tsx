@@ -3,10 +3,15 @@ import { Section } from "@/components/ui/Section";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { BookCard } from "./BookCard";
 
-export function BookGrid() {
+type BookGridProps = {
+  headingAs?: "h1" | "h2";
+};
+
+export function BookGrid({ headingAs = "h2" }: BookGridProps) {
   return (
     <Section id="books" className="bg-cream">
       <SectionHeading
+        as={headingAs}
         title="High-yield books & Q-banks"
         subtitle="Each title is a series — open it to see every volume"
       />

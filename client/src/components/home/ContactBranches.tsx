@@ -5,7 +5,7 @@ import { SectionHeading } from "@/components/ui/SectionHeading";
 
 export function ContactBranches() {
   return (
-    <Section id="contact">
+    <Section id="contact" className="bg-sage">
       <SectionHeading
         eyebrow="Find a centre"
         title="Contact Us"

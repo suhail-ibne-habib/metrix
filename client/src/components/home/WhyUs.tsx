@@ -25,7 +25,7 @@ export function WhyUs() {
             ))}
           </ul>
           <div className="mt-7">
-            <Button href="#inquiry">Join Batch</Button>
+            <Button href="/contact">Join Batch</Button>
           </div>
         </div>
 

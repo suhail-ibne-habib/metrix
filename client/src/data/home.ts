@@ -1,9 +1,11 @@
 export const navLinks = [
   { href: "/", label: "Home" },
-  { href: "#courses", label: "Courses" },
-  { href: "#features", label: "About" },
-  { href: "#inquiry", label: "Blog" },
-    { href: "#inquiry", label: "Contact" },
+  { href: "/about", label: "About" },
+  { href: "/courses", label: "Course" },
+  { href: "/books", label: "Books" },
+  { href: "/contact", label: "Contact" },
+  { href: "/success-stories", label: "Success Stories" },
+  { href: "/demo", label: "Demo" },
 ] as const;
 
 export const hero = {
@@ -35,6 +37,7 @@ export const programs: Array<{
   badge: string;
   title: string;
   points: string[];
+  cover: string;
   tone: ProgramTone;
 }> = [
   {
@@ -42,6 +45,7 @@ export const programs: Array<{
     badge: "FCPS Part I",
     title: "Medicine",
     points: ["Live + recorded classes", "Weekly model tests", "Key notes & SBA drill"],
+    cover: "/courses/davidson.jpeg",
     tone: "red",
   },
   {
@@ -49,6 +53,7 @@ export const programs: Array<{
     badge: "FCPS Part I",
     title: "Surgery",
     points: ["Bailey-focused lectures", "Long & short case prep", "OSPE revision"],
+    cover: "/courses/bailey-loves.jpeg",
     tone: "navy",
   },
   {
@@ -56,6 +61,7 @@ export const programs: Array<{
     badge: "FCPS / MD",
     title: "Radiology",
     points: ["Imaging Q-bank", "Spot diagnosis drills", "Written + viva track"],
+    cover: "/courses/radiology.jpeg",
     tone: "purple",
   },
   {
@@ -63,6 +69,7 @@ export const programs: Array<{
     badge: "FCPS Part I",
     title: "Gynae & Obs",
     points: ["Dutta-based notes", "SBA & recall classes", "Residency guidance"],
+    cover: "/courses/gynae-obs.jpeg",
     tone: "pink",
   },
   {
@@ -70,6 +77,7 @@ export const programs: Array<{
     badge: "FCPS Part I",
     title: "Paediatrics",
     points: ["High-yield topics", "Case discussion", "Exam-oriented notes"],
+    cover: "/courses/digest-key-notes.jpeg",
     tone: "teal",
   },
   {
@@ -77,6 +85,7 @@ export const programs: Array<{
     badge: "FCPS Part I",
     title: "Anaesthesia",
     points: ["Clinical question bank", "Viva station practice", "Mentor support"],
+    cover: "/courses/anesthesiology.jpeg",
     tone: "lime",
   },
 ];
@@ -87,8 +96,10 @@ export type BookVolume = {
   id: string;
   title: string;
   subtitle: string;
-  price: string;
   cover: string;
+  exam: string;
+  description: string;
+  highlights: string[];
 };
 
 export type BookSeries = {
@@ -103,15 +114,23 @@ function volumeSet(
   seriesId: string,
   cover: string,
   count: number,
-  price: string,
   name: string,
+  exam: string,
+  focuses: string[],
 ): BookVolume[] {
   return Array.from({ length: count }, (_, index) => ({
     id: `${seriesId}-vol-${index + 1}`,
     title: `${name} · Vol ${index + 1}`,
-    subtitle: `Question Bank`,
-    price,
+    subtitle: `Question Bank · Volume ${index + 1}`,
     cover,
+    exam,
+    description: `${name} Volume ${index + 1} covers ${focuses[index] ?? "high-yield exam topics"} for ${exam}. Use it for daily drill, recall revision, and last-month practice.`,
+    highlights: [
+      `${focuses[index] ?? "High-yield topics"}`,
+      "SBA and recall-style questions",
+      "Exam-oriented explanations",
+      "Suitable for live batch and self-study",
+    ],
   }));
 }
 
@@ -121,21 +140,55 @@ export const bookSeries: BookSeries[] = [
     title: "Davidson Zero Hour",
     subtitle: "Question Bank · 5 Volumes",
     cover: "/courses/davidson.jpeg",
-    volumes: volumeSet("davidson", "/courses/davidson.jpeg", 5, "৳ 550", "Davidson Zero Hour"),
+    volumes: volumeSet(
+      "davidson",
+      "/courses/davidson.jpeg",
+      5,
+      "Davidson Zero Hour",
+      "FCPS Part-I Medicine · Residency · M.Phil",
+      [
+        "core medicine fundamentals and first-line recalls",
+        "cardiology, respiratory and gastroenterology SBAs",
+        "neurology, endocrine and renal question sets",
+        "infectious disease, haematology and emergency medicine",
+        "full-length revision papers and last-hour drill",
+      ],
+    ),
   },
   {
     id: "bailey-loves",
     title: "Bailey & Love's",
     subtitle: "FCPS Part-I Surgery · 3 Volumes",
     cover: "/courses/bailey-loves.jpeg",
-    volumes: volumeSet("bailey-loves", "/courses/bailey-loves.jpeg", 3, "৳ 850", "Bailey & Love's"),
+    volumes: volumeSet(
+      "bailey-loves",
+      "/courses/bailey-loves.jpeg",
+      3,
+      "Bailey & Love's",
+      "FCPS Part-I Surgery",
+      [
+        "surgical principles, wound healing and trauma basics",
+        "system-wise surgery SBAs and OSPE points",
+        "long and short case recall with viva-style notes",
+      ],
+    ),
   },
   {
     id: "gynae-obs",
     title: "Gynae & Obs",
     subtitle: "Dutta · FCPS Part-I · 2 Volumes",
     cover: "/courses/gynae-obs.jpeg",
-    volumes: volumeSet("gynae-obs", "/courses/gynae-obs.jpeg", 2, "৳ 900", "Gynae & Obs"),
+    volumes: volumeSet(
+      "gynae-obs",
+      "/courses/gynae-obs.jpeg",
+      2,
+      "Gynae & Obs",
+      "FCPS Part-I Gynae & Obs · MRCOG track",
+      [
+        "gynaecology key concepts from Dutta with SBA drill",
+        "obstetrics recalls, labour ward problems and viva points",
+      ],
+    ),
   },
   {
     id: "digest-key-notes",
@@ -147,22 +200,46 @@ export const bookSeries: BookSeries[] = [
         id: "digest",
         title: "Digest",
         subtitle: "FCPS Part-I · Residency",
-        price: "৳ 650",
         cover: "/courses/digest-key-notes.jpeg",
+        exam: "FCPS Part-I · Residency",
+        description:
+          "Digest gathers the fundamental part of FCPS Part-I and residency prep — pathology, microbiology, pharmacology and anatomy — in one compact volume.",
+        highlights: [
+          "Fundamental / basic part in one book",
+          "High-yield tables for quick revision",
+          "Built for both residency and FCPS Part-I",
+          "Pairs with live batch notes",
+        ],
       },
       {
         id: "key-notes",
         title: "Key Notes",
         subtitle: "FCPS Part-I · Residency",
-        price: "৳ 650",
         cover: "/courses/digest-key-notes.jpeg",
+        exam: "FCPS Part-I · Residency",
+        description:
+          "Key Notes is the clinical companion — system-wise points, must-remember facts and last-month revision lines for medicine and allied subjects.",
+        highlights: [
+          "Clinical part, system by system",
+          "Exam-line facts without extra padding",
+          "Useful on duty between live classes",
+          "Works with weekly model tests",
+        ],
       },
       {
         id: "q-bank",
         title: "Q.Bank",
         subtitle: "FCPS Part-I · Residency",
-        price: "৳ 650",
         cover: "/courses/digest-key-notes.jpeg",
+        exam: "FCPS Part-I · Residency",
+        description:
+          "Q.Bank is the SBA and MCQ practice set for FCPS Part-I and residency. Use it after class to lock in recalls and find weak topics.",
+        highlights: [
+          "SBA and MCQ practice papers",
+          "Covers basic and clinical parts",
+          "Answer keys for self-check",
+          "Exam-style timing practice",
+        ],
       },
     ],
   },
@@ -171,33 +248,84 @@ export const bookSeries: BookSeries[] = [
     title: "Radiology & Imaging",
     subtitle: "Question Bank · 2 Volumes",
     cover: "/courses/radiology.jpeg",
-    volumes: volumeSet("radiology", "/courses/radiology.jpeg", 2, "৳ 550", "Radiology & Imaging"),
+    volumes: volumeSet(
+      "radiology",
+      "/courses/radiology.jpeg",
+      2,
+      "Radiology & Imaging",
+      "FCPS / MD Radiology",
+      [
+        "plain film, ultrasound and CT spot diagnosis",
+        "MRI, contrast studies and written-plus-viva track",
+      ],
+    ),
   },
   {
     id: "ophthalmology",
     title: "Ophthalmology",
     subtitle: "Question Bank · 2 Volumes",
     cover: "/courses/ophthalmology.jpeg",
-    volumes: volumeSet("ophthalmology", "/courses/ophthalmology.jpeg", 2, "৳ 600", "Ophthalmology"),
+    volumes: volumeSet(
+      "ophthalmology",
+      "/courses/ophthalmology.jpeg",
+      2,
+      "Ophthalmology",
+      "FCPS Part-I Ophthalmology",
+      [
+        "anatomy, optics and basic science questions",
+        "clinical ophthalmology SBAs and viva stations",
+      ],
+    ),
   },
   {
     id: "pathology",
     title: "Pathology",
     subtitle: "Histopathology · FCPS Part-I · 2 Volumes",
     cover: "/courses/pathology.jpeg",
-    volumes: volumeSet("pathology", "/courses/pathology.jpeg", 2, "৳ 550", "Pathology"),
+    volumes: volumeSet(
+      "pathology",
+      "/courses/pathology.jpeg",
+      2,
+      "Pathology",
+      "FCPS Part-I Histopathology",
+      [
+        "general pathology and cell-injury question sets",
+        "systemic histopathology slides and written recalls",
+      ],
+    ),
   },
   {
     id: "microbiology",
     title: "Microbiology",
     subtitle: "Question Bank · 2 Volumes",
     cover: "/courses/microbiology.jpeg",
-    volumes: volumeSet("microbiology", "/courses/microbiology.jpeg", 2, "৳ 500", "Microbiology"),
+    volumes: volumeSet(
+      "microbiology",
+      "/courses/microbiology.jpeg",
+      2,
+      "Microbiology",
+      "FCPS Part-I Microbiology",
+      [
+        "bacteriology, staining and culture-based SBAs",
+        "virology, mycology, parasitology and immunology",
+      ],
+    ),
   },
 ];
 
 export function getBookSeries(id: string) {
   return bookSeries.find((series) => series.id === id);
+}
+
+export function getBookVolume(seriesId: string, volumeId: string) {
+  const series = getBookSeries(seriesId);
+  const volume = series?.volumes.find((item) => item.id === volumeId);
+
+  if (!series || !volume) {
+    return null;
+  }
+
+  return { series, volume };
 }
 
 export const features = [
@@ -347,10 +475,12 @@ export const branches = [
 export const footer = {
   tagline: "Confidence, Creativity & Credibility.",
   company: [
-    { href: "#features", label: "About" },
-    { href: "#courses", label: "Courses" },
-    { href: "#inquiry", label: "Admission" },
-    { href: "#inquiry", label: "Contact" },
+    { href: "/about", label: "About" },
+    { href: "/courses", label: "Course" },
+    { href: "/books", label: "Books" },
+    { href: "/contact", label: "Contact" },
+    { href: "/success-stories", label: "Success Stories" },
+    { href: "/demo", label: "Demo" },
   ],
   phone: "+880 1404-432536",
   email: "info@matrixpoint.edu",

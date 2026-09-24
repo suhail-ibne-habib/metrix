@@ -23,7 +23,7 @@ export function Hero() {
           </p>
           <div className="mt-8 flex flex-wrap gap-3">
             <Button href="#inquiry">{hero.cta}</Button>
-            <Button href="/#books" variant="gold">
+            <Button href="/books" variant="gold">
               {hero.ctaSecondary}
             </Button>
           </div>

@@ -11,30 +11,20 @@ export function Header() {
       <Container className="flex h-20 items-center justify-between gap-4">
         <Logo />
 
-        <nav className="hidden items-center gap-7 md:flex">
-          {navLinks.map((link) =>
-            link.href.startsWith("#") ? (
-              <a
-                key={link.label}
-                href={`/${link.href}`}
-                className="text-sm font-medium text-slate-500 transition-colors hover:text-forest"
-              >
-                {link.label}
-              </a>
-            ) : (
-              <Link
-                key={link.label}
-                href={link.href}
-                className="text-sm font-medium text-slate-500 transition-colors hover:text-forest"
-              >
-                {link.label}
-              </Link>
-            ),
-          )}
+        <nav className="hidden items-center gap-4 xl:flex xl:gap-6">
+          {navLinks.map((link) => (
+            <Link
+              key={link.label}
+              href={link.href}
+              className="text-sm font-medium whitespace-nowrap text-slate-500 transition-colors hover:text-forest"
+            >
+              {link.label}
+            </Link>
+          ))}
         </nav>
 
-        <div className="hidden md:block">
-          <Button size="sm" href="/#inquiry">
+        <div className="hidden xl:block">
+          <Button size="sm" href="/contact">
             Join Batch
           </Button>
         </div>

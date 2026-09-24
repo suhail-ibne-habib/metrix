@@ -10,10 +10,10 @@ export function CtaBand() {
           লাইভ ক্লাস, কি-নোটস ও Q-Bank একসাথে — আপনার পোস্ট-গ্র্যাড যাত্রা এখান থেকে শুরু।
         </p>
         <div className="mt-7 flex flex-wrap justify-center gap-3">
-          <Button href="#inquiry" variant="gold">
+          <Button href="/contact" variant="gold">
             Apply now
           </Button>
-          <Button href="#courses" variant="light">
+          <Button href="/courses" variant="light">
             View courses
           </Button>
         </div>
