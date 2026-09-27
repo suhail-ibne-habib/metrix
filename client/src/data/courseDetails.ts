@@ -27,7 +27,22 @@ export const courseInstructors = [
   { name: "Dr. Shahadat Jewel", role: "Lead Mentor, Matrix Point" },
 ];
 
-const courseDetails: Record<string, CourseDetail> = {
+export type Course = {
+  id: string;
+  title: string;
+  subtitle: string;
+  detail: CourseDetail;
+};
+
+export type CourseCategory = {
+  id: string;
+  badge: string;
+  title: string;
+  cover: string;
+  courses: Course[];
+};
+
+const baseDetails: Record<string, CourseDetail> = {
   medicine: {
     duration: "6 Months",
     lectures: 60,
@@ -222,13 +237,73 @@ const courseDetails: Record<string, CourseDetail> = {
   },
 };
 
-export function getCourse(id: string) {
-  const program = programs.find((item) => item.id === id);
-  const detail = courseDetails[id];
+const courseTypes = [
+  {
+    id: "live",
+    label: "Live Batch",
+    subtitle: "Live + recorded classes",
+    build: (base: CourseDetail) => base,
+  },
+  {
+    id: "exam",
+    label: "Exam Batch",
+    subtitle: "Weekly model tests & solve class",
+    build: (base: CourseDetail, title: string): CourseDetail => ({
+      ...base,
+      duration: "3 Months",
+      lectures: Math.round(base.lectures / 3),
+      liveClasses: Math.round(base.lectures / 3),
+      overview: `${title} Exam Batch-এ সাপ্তাহিক মডেল টেস্ট আর প্রতিটি পরীক্ষার পর Solve Class থাকে। যাঁদের পড়া শেষ, শুধু প্র্যাকটিস আর রিভিশন দরকার — তাঁদের জন্য।`,
+      outcomes: [
+        "Weekly model tests in exam pattern",
+        "Solve class after every exam",
+        "Merit list and progress tracking",
+        "Final mock tests",
+      ],
+    }),
+  },
+  {
+    id: "recorded",
+    label: "Recorded Course",
+    subtitle: "Watch and revise anytime",
+    build: (base: CourseDetail, title: string): CourseDetail => ({
+      ...base,
+      liveClasses: 0,
+      overview: `${title} Recorded Course-এ পুরো সিলেবাসের HD রেকর্ডেড লেকচার — ডিউটির ফাঁকে যেকোনো সময়, যতবার দরকার দেখা যায়।`,
+      outcomes: [
+        "Full syllabus in HD recorded lectures",
+        "Watch anytime, as many times as needed",
+        "Lecture sheets with every class",
+        "Model tests to check progress",
+      ],
+    }),
+  },
+];
 
-  if (!program || !detail) {
+export const courseCategories: CourseCategory[] = programs.map((program) => ({
+  id: program.id,
+  badge: program.badge,
+  title: program.title,
+  cover: program.cover,
+  courses: courseTypes.map((type) => ({
+    id: type.id,
+    title: `${program.title} ${type.label}`,
+    subtitle: type.subtitle,
+    detail: type.build(baseDetails[program.id], program.title),
+  })),
+}));
+
+export function getCourseCategory(id: string) {
+  return courseCategories.find((category) => category.id === id);
+}
+
+export function getCourse(categoryId: string, courseId: string) {
+  const category = getCourseCategory(categoryId);
+  const course = category?.courses.find((item) => item.id === courseId);
+
+  if (!category || !course) {
     return null;
   }
 
-  return { program, detail };
+  return { category, course };
 }

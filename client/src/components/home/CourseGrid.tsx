@@ -19,11 +19,12 @@ export function CourseGrid({ headingAs = "h2" }: CourseGridProps) {
         {programs.map((program) => (
           <CourseCard
             key={program.id}
-            id={program.id}
             badge={program.badge}
             title={program.title}
-            points={program.points}
+            subtitle={program.points[0]}
             cover={program.cover}
+            href={`/courses/${program.id}`}
+            cta="View courses"
           />
         ))}
       </div>

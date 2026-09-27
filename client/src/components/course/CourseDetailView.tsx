@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { Check } from "lucide-react";
-import { courseInstructors, type CourseDetail } from "@/data/courseDetails";
+import { courseInstructors, type Course, type CourseCategory } from "@/data/courseDetails";
 import { testimonials } from "@/data/home";
 import { TestimonialCard } from "@/components/home/TestimonialCard";
 import { Container } from "@/components/ui/Container";
@@ -9,19 +9,15 @@ import { CourseSidebar } from "./CourseSidebar";
 import { CourseTabs } from "./CourseTabs";
 
 type CourseDetailViewProps = {
-  program: {
-    badge: string;
-    title: string;
-    points: string[];
-    cover: string;
-  };
-  detail: CourseDetail;
+  category: CourseCategory;
+  course: Course;
 };
 
 const panelClass =
   "rounded-2xl bg-white p-6 shadow-[0_10px_40px_rgba(15,23,42,0.06)] ring-1 ring-slate-100";
 
-export function CourseDetailView({ program, detail }: CourseDetailViewProps) {
+export function CourseDetailView({ category, course }: CourseDetailViewProps) {
+  const { detail } = course;
   const tabs = [
     {
       id: "overview",
@@ -115,23 +111,24 @@ export function CourseDetailView({ program, detail }: CourseDetailViewProps) {
   return (
     <main className="bg-mint">
       <Container className="py-16 sm:py-20">
-        <Link href="/courses" className="text-sm font-medium text-forest hover:text-lime-dark">
-          ← All courses
+        <Link
+          href={`/courses/${category.id}`}
+          className="text-sm font-medium text-forest hover:text-lime-dark"
+        >
+          ← {category.title} Courses
         </Link>
 
         <div className="mt-8 grid gap-8 lg:grid-cols-[minmax(0,1fr)_22rem] lg:grid-rows-[auto_1fr] lg:gap-x-10">
           <header className="lg:col-start-1">
-            <p className="text-sm font-semibold text-lime-dark">{program.badge}</p>
+            <p className="text-sm font-semibold text-lime-dark">{category.badge}</p>
             <h1 className="mt-2 text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl">
-              {program.title} Batch
+              {course.title}
             </h1>
-            <p className="mt-3 text-sm text-slate-500 sm:text-base">
-              {program.points.join(" · ")}
-            </p>
+            <p className="mt-3 text-sm text-slate-500 sm:text-base">{course.subtitle}</p>
           </header>
 
           <aside className="lg:sticky lg:top-24 lg:col-start-2 lg:row-span-2 lg:row-start-1 lg:self-start">
-            <CourseSidebar title={program.title} cover={program.cover} detail={detail} />
+            <CourseSidebar title={course.title} cover={category.cover} detail={detail} />
           </aside>
 
           <div className="min-w-0 lg:col-start-1">
