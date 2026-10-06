@@ -12,8 +12,8 @@ export function CourseGrid({ headingAs = "h2" }: CourseGridProps) {
     <Section id="courses" className="bg-sage">
       <SectionHeading
         as={headingAs}
-        title="We provide batches for"
-        subtitle="বিষয় বেছে নিন, ব্যাচে জয়েন করুন"
+        title="Our Programs"
+        subtitle="প্রোগ্রাম বেছে নিন, তারপর বিষয় দেখুন"
       />
       <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
         {programs.map((program) => (
@@ -21,7 +21,7 @@ export function CourseGrid({ headingAs = "h2" }: CourseGridProps) {
             key={program.id}
             badge={program.badge}
             title={program.title}
-            subtitle={program.points[0]}
+            subtitle={program.points.join(" · ")}
             cover={program.cover}
             href={`/courses/${program.id}`}
             cta="View courses"

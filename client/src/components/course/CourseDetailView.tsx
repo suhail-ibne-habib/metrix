@@ -128,7 +128,7 @@ export function CourseDetailView({ category, course }: CourseDetailViewProps) {
           </header>
 
           <aside className="lg:sticky lg:top-24 lg:col-start-2 lg:row-span-2 lg:row-start-1 lg:self-start">
-            <CourseSidebar title={course.title} cover={category.cover} detail={detail} />
+            <CourseSidebar title={course.title} cover={course.cover} detail={detail} />
           </aside>
 
           <div className="min-w-0 lg:col-start-1">

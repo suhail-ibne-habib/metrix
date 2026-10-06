@@ -31,6 +31,7 @@ export type Course = {
   id: string;
   title: string;
   subtitle: string;
+  cover: string;
   detail: CourseDetail;
 };
 
@@ -42,14 +43,23 @@ export type CourseCategory = {
   courses: Course[];
 };
 
-const baseDetails: Record<string, CourseDetail> = {
-  medicine: {
+function course(
+  id: string,
+  title: string,
+  subtitle: string,
+  cover: string,
+  detail: CourseDetail,
+): Course {
+  return { id, title, subtitle, cover, detail };
+}
+
+const medicine: CourseDetail = {
     duration: "6 Months",
     lectures: 60,
     exams: 48,
     liveClasses: 60,
     overview:
-      "FCPS Part-I Medicine ব্যাচে লাইভ ক্লাস, রেকর্ডেড রিভিশন আর সাপ্তাহিক মডেল টেস্ট একসাথে। Davidson-ভিত্তিক সিলেবাস ধরে প্রতিটি সিস্টেম শেষ করে Previous Question Solve Class দিয়ে রিকল পাকা করা হয়।",
+      "Medicine ব্যাচে লাইভ ক্লাস, রেকর্ডেড রিভিশন আর সাপ্তাহিক মডেল টেস্ট একসাথে। সিস্টেম ধরে ক্লাস শেষ করে Previous Question Solve Class দিয়ে রিকল পাকা করা হয়।",
     outcomes: [
       "System-wise live classes from Davidson",
       "Previous question solve class every week",
@@ -74,14 +84,15 @@ const baseDetails: Record<string, CourseDetail> = {
         lessons: ["Neurology", "Haematology & acute medicine", "Infectious disease", "Rheumatology"],
       },
     ],
-  },
-  surgery: {
+};
+
+const surgery: CourseDetail = {
     duration: "6 Months",
     lectures: 55,
     exams: 44,
     liveClasses: 55,
     overview:
-      "FCPS Part-I Surgery ব্যাচে Bailey & Love's ধরে সার্জিক্যাল প্রিন্সিপল থেকে সিস্টেম-ভিত্তিক টপিক পর্যন্ত পড়ানো হয়। লং ও শর্ট কেস আর OSPE প্রস্তুতি আলাদা সেশনে থাকে।",
+      "Surgery ব্যাচে সার্জিক্যাল প্রিন্সিপল থেকে সিস্টেম-ভিত্তিক টপিক পর্যন্ত পড়ানো হয়। লং ও শর্ট কেস আর OSPE প্রস্তুতি আলাদা সেশনে থাকে।",
     outcomes: [
       "Bailey-focused lectures, topic by topic",
       "Long and short case preparation",
@@ -106,46 +117,15 @@ const baseDetails: Record<string, CourseDetail> = {
         lessons: ["Long case approach", "Short case & spotting", "OSPE revision"],
       },
     ],
-  },
-  radiology: {
-    duration: "5 Months",
-    lectures: 45,
-    exams: 36,
-    liveClasses: 45,
-    overview:
-      "FCPS / MD Radiology ব্যাচে ইমেজিং ফিজিক্স থেকে শুরু করে প্রতিটি মোডালিটির স্পট ডায়াগনসিস প্র্যাকটিস করানো হয়। লিখিত ও ভাইভা — দুই ট্র্যাকের প্রস্তুতি একসাথে।",
-    outcomes: [
-      "Imaging Q-bank practice",
-      "Spot diagnosis drills every week",
-      "Written plus viva track",
-      "Case-based image discussion",
-    ],
-    curriculum: [
-      {
-        title: "Physics & Safety",
-        lessons: ["Radiation physics", "Radiation protection", "Contrast agents"],
-      },
-      {
-        title: "Plain Film & Ultrasound",
-        lessons: ["Chest & abdominal X-ray", "Musculoskeletal films", "Ultrasound basics"],
-      },
-      {
-        title: "CT & MRI",
-        lessons: ["CT head & body", "MRI principles", "Neuro imaging"],
-      },
-      {
-        title: "Spot Diagnosis",
-        lessons: ["Image quiz sessions", "Viva practice", "Final revision"],
-      },
-    ],
-  },
-  gynae: {
+};
+
+const gynae: CourseDetail = {
     duration: "6 Months",
     lectures: 50,
     exams: 40,
     liveClasses: 50,
     overview:
-      "FCPS Part-I Gynae & Obs ব্যাচে DC Dutta-ভিত্তিক নোট, SBA ও রিকল ক্লাস থাকে। গাইনি আর অবস — দুই অংশের কি-কনসেপ্ট সামারি ক্লাস দিয়ে রিভিশন করানো হয়।",
+      "Gynae & Obs ব্যাচে DC Dutta-ভিত্তিক নোট, SBA ও রিকল ক্লাস থাকে। গাইনি আর অবস — দুই অংশের কি-কনসেপ্ট সামারি ক্লাস দিয়ে রিভিশন করানো হয়।",
     outcomes: [
       "Dutta-based notes and key concepts",
       "SBA and recall classes",
@@ -170,14 +150,15 @@ const baseDetails: Record<string, CourseDetail> = {
         lessons: ["Class summary sessions", "Recall SBA drill", "Final mock tests"],
       },
     ],
-  },
-  paediatrics: {
+};
+
+const pediatrics: CourseDetail = {
     duration: "5 Months",
     lectures: 45,
     exams: 36,
     liveClasses: 45,
     overview:
-      "FCPS Part-I Paediatrics ব্যাচে হাই-ইল্ড টপিক, কেস ডিসকাশন আর এক্সাম-ওরিয়েন্টেড নোট থাকে। প্রতিটি সিস্টেম শেষে মডেল টেস্ট দিয়ে দুর্বল জায়গা ধরা হয়।",
+      "Pediatrics ব্যাচে হাই-ইল্ড টপিক, কেস ডিসকাশন আর এক্সাম-ওরিয়েন্টেড নোট থাকে। প্রতিটি সিস্টেম শেষে মডেল টেস্ট দিয়ে দুর্বল জায়গা ধরা হয়।",
     outcomes: [
       "High-yield topic classes",
       "Case discussion sessions",
@@ -202,14 +183,15 @@ const baseDetails: Record<string, CourseDetail> = {
         lessons: ["Paediatric infections", "Case discussion", "Final mock tests"],
       },
     ],
-  },
-  anaesthesia: {
+};
+
+const anesthesia: CourseDetail = {
     duration: "5 Months",
     lectures: 40,
     exams: 32,
     liveClasses: 40,
     overview:
-      "FCPS Part-I Anaesthesia ব্যাচে ক্লিনিক্যাল কোয়েশ্চেন ব্যাংক, ফিজিওলজি ও ফার্মাকোলজি এক সাথে পড়ানো হয়। ভাইভা স্টেশনের প্র্যাকটিস আলাদা সেশনে থাকে।",
+      "Anesthesia ব্যাচে ক্লিনিক্যাল কোয়েশ্চেন ব্যাংক, ফিজিওলজি ও ফার্মাকোলজি এক সাথে পড়ানো হয়। ভাইভা স্টেশনের প্র্যাকটিস আলাদা সেশনে থাকে।",
     outcomes: [
       "Clinical question bank practice",
       "Physiology and pharmacology classes",
@@ -234,63 +216,220 @@ const baseDetails: Record<string, CourseDetail> = {
         lessons: ["Regional anaesthesia", "Critical care basics", "Viva station practice"],
       },
     ],
-  },
 };
 
-const courseTypes = [
-  {
-    id: "live",
-    label: "Live Batch",
-    subtitle: "Live + recorded classes",
-    build: (base: CourseDetail) => base,
+const basicScience: CourseDetail = {
+  duration: "5 Months",
+  lectures: 48,
+  exams: 36,
+  liveClasses: 48,
+  overview:
+    "Basic Science ব্যাচে Anatomy, Physiology, Biochemistry, Pathology, Microbiology ও Pharmacology একসাথে পড়ানো হয়। রেসিডেন্সি ও ডিপ্লোমার বেসিক পার্টের জন্য।",
+  outcomes: [
+    "Subject-wise basic science classes",
+    "High-yield tables and recall lines",
+    "SBA drill after every subject",
+    "Weekly model tests",
+  ],
+  curriculum: [
+    {
+      title: "Anatomy & Physiology",
+      lessons: ["Gross anatomy high-yield", "Systemic physiology", "Neuroanatomy basics"],
+    },
+    {
+      title: "Biochemistry & Pharmacology",
+      lessons: ["Clinical biochemistry", "General pharmacology", "Autonomic & antimicrobial drugs"],
+    },
+    {
+      title: "Pathology & Microbiology",
+      lessons: ["General pathology", "Systemic pathology", "Bacteriology, virology & immunology"],
+    },
+    {
+      title: "Revision",
+      lessons: ["Integrated basic science", "SBA drill", "Final mock tests"],
+    },
+  ],
+};
+
+const ent: CourseDetail = {
+  duration: "4 Months",
+  lectures: 36,
+  exams: 28,
+  liveClasses: 36,
+  overview:
+    "ENT ব্যাচে ear, nose ও throat-এর অ্যানাটমি থেকে ক্লিনিক্যাল কেস পর্যন্ত পড়ানো হয়। লিখিত, SBA ও ভাইভা — তিন ট্র্যাকের প্রস্তুতি একসাথে।",
+  outcomes: [
+    "Ear, nose and throat topic classes",
+    "Clinical case discussion",
+    "SBA and viva practice",
+    "Final mock tests",
+  ],
+  curriculum: [
+    {
+      title: "Ear",
+      lessons: ["Anatomy & hearing", "Otitis & discharge", "Hearing loss"],
+    },
+    {
+      title: "Nose & Sinus",
+      lessons: ["Epistaxis", "Sinusitis & polyps", "Nasal obstruction"],
+    },
+    {
+      title: "Throat & Neck",
+      lessons: ["Tonsil & adenoid", "Larynx & voice", "Neck swellings"],
+    },
+    {
+      title: "Revision",
+      lessons: ["Instrument & image spotting", "Viva practice", "Final mock tests"],
+    },
+  ],
+};
+
+const dermatology: CourseDetail = {
+  duration: "4 Months",
+  lectures: 36,
+  exams: 28,
+  liveClasses: 36,
+  overview:
+    "Dermatology ব্যাচে স্কিন, হেয়ার ও STI-এর হাই-ইল্ড টপিক পড়ানো হয়। স্পট ডায়াগনসিস আর SBA ড্রিল আলাদা সেশনে থাকে।",
+  outcomes: [
+    "Lesion-based clinical classes",
+    "Spot diagnosis drills",
+    "STI and leprosy revision",
+    "SBA and viva practice",
+  ],
+  curriculum: [
+    {
+      title: "Basic Dermatology",
+      lessons: ["Morphology of lesions", "Eczema & psoriasis", "Infections of skin"],
+    },
+    {
+      title: "Systemic & STI",
+      lessons: ["Bullous disorders", "Leprosy", "Sexually transmitted infections"],
+    },
+    {
+      title: "Hair, Nail & Allergy",
+      lessons: ["Alopecia", "Nail disorders", "Urticaria & drug rash"],
+    },
+    {
+      title: "Revision",
+      lessons: ["Image spotting", "Viva practice", "Final mock tests"],
+    },
+  ],
+};
+
+const textbook = {
+  medicine: {
+    ...medicine,
+    duration: "4 Months",
+    overview:
+      "Clinical Medicine ক্লাস পুরোপুরি Davidson-ভিত্তিক। চ্যাপ্টার ধরে ক্লিনিক্যাল পয়েন্ট, কেস ডিসকাশন আর রিভিশন একসাথে চলে।",
   },
-  {
-    id: "exam",
-    label: "Exam Batch",
-    subtitle: "Weekly model tests & solve class",
-    build: (base: CourseDetail, title: string): CourseDetail => ({
-      ...base,
-      duration: "3 Months",
-      lectures: Math.round(base.lectures / 3),
-      liveClasses: Math.round(base.lectures / 3),
-      overview: `${title} Exam Batch-এ সাপ্তাহিক মডেল টেস্ট আর প্রতিটি পরীক্ষার পর Solve Class থাকে। যাঁদের পড়া শেষ, শুধু প্র্যাকটিস আর রিভিশন দরকার — তাঁদের জন্য।`,
-      outcomes: [
-        "Weekly model tests in exam pattern",
-        "Solve class after every exam",
-        "Merit list and progress tracking",
-        "Final mock tests",
-      ],
-    }),
+  surgery: {
+    ...surgery,
+    duration: "4 Months",
+    overview:
+      "Clinical Surgery ক্লাস Bailey & Love's ধরে। সার্জিক্যাল প্রিন্সিপল, সিস্টেম-ভিত্তিক চ্যাপ্টার আর লং-শর্ট কেস একসাথে।",
   },
-  {
-    id: "recorded",
-    label: "Recorded Course",
-    subtitle: "Watch and revise anytime",
-    build: (base: CourseDetail, title: string): CourseDetail => ({
-      ...base,
-      liveClasses: 0,
-      overview: `${title} Recorded Course-এ পুরো সিলেবাসের HD রেকর্ডেড লেকচার — ডিউটির ফাঁকে যেকোনো সময়, যতবার দরকার দেখা যায়।`,
-      outcomes: [
-        "Full syllabus in HD recorded lectures",
-        "Watch anytime, as many times as needed",
-        "Lecture sheets with every class",
-        "Model tests to check progress",
-      ],
-    }),
+  gynae: {
+    ...gynae,
+    duration: "4 Months",
+    overview:
+      "Clinical Gynae & Obs ক্লাস টেক্সটবুক ধরে। গাইনি ও অবস — দুই অংশের ক্লিনিক্যাল পয়েন্ট আর কেস ডিসকাশন থাকে।",
   },
-];
+  pediatrics: {
+    ...pediatrics,
+    duration: "4 Months",
+    overview:
+      "Clinical Pediatrics ক্লাস টেক্সটবুক ধরে। নিওনেট থেকে সিস্টেমিক পেডিয়াট্রিক্স — কেস ডিসকাশনসহ পড়ানো হয়।",
+  },
+  anesthesia: {
+    ...anesthesia,
+    duration: "4 Months",
+    overview:
+      "Anesthesiology ক্লিনিক্যাল ক্লাসে ফিজিওলজি, ফার্মাকোলজি ও ইকুইপমেন্ট টেক্সটবুক ধরে পড়ানো হয়। ভাইভা স্টেশনের প্র্যাকটিস আলাদা সেশনে থাকে।",
+  },
+  ent: {
+    ...ent,
+    duration: "4 Months",
+    overview:
+      "Clinical ENT ক্লাস টেক্সটবুক ধরে। Ear, nose ও throat-এর ক্লিনিক্যাল কেস, ইন্সট্রুমেন্ট ও রিভিশন একসাথে।",
+  },
+  dermatology: {
+    ...dermatology,
+    duration: "4 Months",
+    overview:
+      "Clinical Dermatology ক্লাস টেক্সটবুক ধরে। লেশন দেখে ডায়াগনসিস, STI রিভিশন আর স্পট প্র্যাকটিস থাকে।",
+  },
+} satisfies Record<string, CourseDetail>;
+
+function examDetail(name: string, lessons: string[]): CourseDetail {
+  return {
+    duration: "3 Months",
+    lectures: 24,
+    exams: 36,
+    liveClasses: 24,
+    overview: `${name} Exam Batch-এ সাপ্তাহিক মডেল টেস্ট আর প্রতিটি পরীক্ষার পর Solve Class থাকে। যাঁদের পড়া এগিয়ে আছে, শুধু প্র্যাকটিস আর রিভিশন দরকার — তাঁদের জন্য।`,
+    outcomes: [
+      "Weekly model tests in exam pattern",
+      "Solve class after every exam",
+      "Merit list and progress tracking",
+      "Final mock tests",
+    ],
+    curriculum: [
+      { title: "Pattern & Plan", lessons: [`${name} exam pattern`, "Topic-wise revision plan"] },
+      { title: "Model Tests", lessons },
+      { title: "Solve Class", lessons: ["Answer discussion", "Weak-topic repair"] },
+      { title: "Final Mocks", lessons: ["Full-length mock", "Last-week revision"] },
+    ],
+  };
+}
+
+const coursesByProgram: Record<string, Course[]> = {
+  residency: [
+    course("medicine", "Medicine", "Residency · Medicine", "/courses/davidson.jpeg", medicine),
+    course("surgery", "Surgery", "Residency · Surgery", "/courses/bailey-loves.jpeg", surgery),
+    course("pediatrics", "Pediatrics", "Residency · Pediatrics", "/courses/digest-key-notes.jpeg", pediatrics),
+    course("basic-science", "Basic Science", "Residency · Basic Science", "/courses/pathology.jpeg", basicScience),
+  ],
+  "mphil-diploma": [
+    course("medicine", "Medicine", "M.Phil/Diploma · Medicine", "/courses/davidson.jpeg", medicine),
+    course("surgery", "Surgery", "M.Phil/Diploma · Surgery", "/courses/bailey-loves.jpeg", surgery),
+    course("pediatrics", "Pediatrics", "M.Phil/Diploma · Pediatrics", "/courses/digest-key-notes.jpeg", pediatrics),
+    course("basic-science", "Basic Science", "M.Phil/Diploma · Basic Science", "/courses/microbiology.jpeg", basicScience),
+  ],
+  "fcps-p1": [
+    course("medicine", "Medicine", "FCPS P-1 · Medicine", "/courses/davidson.jpeg", medicine),
+    course("surgery", "Surgery", "FCPS P-1 · Surgery", "/courses/bailey-loves.jpeg", surgery),
+    course("gynae-obs", "Gynae & Obs", "FCPS P-1 · Gynae & Obs", "/courses/gynae-obs.jpeg", gynae),
+    course("pediatrics", "Pediatrics", "FCPS P-1 · Pediatrics", "/courses/digest-key-notes.jpeg", pediatrics),
+    course("ent", "ENT", "FCPS P-1 · ENT", "/courses/ophthalmology.jpeg", ent),
+    course("anesthesia", "Anesthesia", "FCPS P-1 · Anesthesia", "/courses/anesthesiology.jpeg", anesthesia),
+    course("dermatology", "Dermatology", "FCPS P-1 · Dermatology", "/courses/dermatology.jpeg", dermatology),
+  ],
+  "clinical-class": [
+    course("clinical-medicine", "Clinical Medicine (Davidson)", "Text book based", "/courses/davidson.jpeg", textbook.medicine),
+    course("clinical-surgery", "Clinical Surgery (Bailey & Love's)", "Text book based", "/courses/bailey-loves.jpeg", textbook.surgery),
+    course("clinical-gynae", "Clinical Gynae & Obs", "Text book based", "/courses/gynae-obs.jpeg", textbook.gynae),
+    course("clinical-pediatrics", "Clinical Pediatrics", "Text book based", "/courses/digest-key-notes.jpeg", textbook.pediatrics),
+    course("anesthesiology", "Anesthesiology", "Text book based", "/courses/anesthesiology.jpeg", textbook.anesthesia),
+    course("clinical-ent", "Clinical ENT", "Text book based", "/courses/ophthalmology.jpeg", textbook.ent),
+    course("clinical-dermatology", "Clinical Dermatology", "Text book based", "/courses/dermatology.jpeg", textbook.dermatology),
+  ],
+  "exam-batch": [
+    course("residency", "Residency", "Exam Batch · Residency", "/courses/davidson.jpeg", examDetail("Residency", ["Medicine paper", "Surgery paper", "Basic science paper"])),
+    course("mphil-diploma", "M.Phil/Diploma", "Exam Batch · M.Phil/Diploma", "/courses/pathology.jpeg", examDetail("M.Phil/Diploma", ["Subject paper", "Basic science paper"])),
+    course("fcps-p1", "FCPS P-1", "Exam Batch · FCPS P-1", "/courses/bailey-loves.jpeg", examDetail("FCPS P-1", ["Paper I", "Paper II", "SBA drill"])),
+    course("mph", "MPH", "Exam Batch · MPH", "/courses/microbiology.jpeg", examDetail("MPH", ["Epidemiology", "Biostatistics", "Public health"])),
+    course("bcs", "BCS", "Exam Batch · BCS", "/courses/sba.jpeg", examDetail("BCS", ["Medical science", "General knowledge", "Model written"])),
+  ],
+};
 
 export const courseCategories: CourseCategory[] = programs.map((program) => ({
   id: program.id,
   badge: program.badge,
   title: program.title,
   cover: program.cover,
-  courses: courseTypes.map((type) => ({
-    id: type.id,
-    title: `${program.title} ${type.label}`,
-    subtitle: type.subtitle,
-    detail: type.build(baseDetails[program.id], program.title),
-  })),
+  courses: coursesByProgram[program.id],
 }));
 
 export function getCourseCategory(id: string) {

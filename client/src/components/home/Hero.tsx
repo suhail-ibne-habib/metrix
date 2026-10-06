@@ -1,5 +1,6 @@
 import { Award, GraduationCap, Users } from "lucide-react";
-import { hero, programs } from "@/data/home";
+import { courseCategories } from "@/data/courseDetails";
+import { hero } from "@/data/home";
 import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
 import { HeroVisual } from "./HeroVisual";
@@ -40,10 +41,14 @@ export function Hero() {
               <option value="" disabled>
                 Select batch
               </option>
-              {programs.map((program) => (
-                <option key={program.id} value={program.id}>
-                  {program.title}
-                </option>
+              {courseCategories.map((category) => (
+                <optgroup key={category.id} label={category.title}>
+                  {category.courses.map((course) => (
+                    <option key={`${category.id}-${course.id}`} value={`${category.id}/${course.id}`}>
+                      {category.title} — {course.title}
+                    </option>
+                  ))}
+                </optgroup>
               ))}
             </select>
             <input

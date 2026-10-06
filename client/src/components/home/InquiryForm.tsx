@@ -1,7 +1,7 @@
 "use client";
 
 import { FormEvent, useState } from "react";
-import { programs } from "@/data/home";
+import { courseCategories } from "@/data/courseDetails";
 import { Button } from "@/components/ui/Button";
 import { Section } from "@/components/ui/Section";
 import { SectionHeading } from "@/components/ui/SectionHeading";
@@ -58,10 +58,14 @@ export function InquiryForm() {
                 <option value="" disabled>
                   ব্যাচ / কোর্স বেছে নিন
                 </option>
-                {programs.map((program) => (
-                  <option key={program.id} value={program.id}>
-                    {program.title}
-                  </option>
+                {courseCategories.map((category) => (
+                  <optgroup key={category.id} label={category.title}>
+                    {category.courses.map((course) => (
+                      <option key={`${category.id}-${course.id}`} value={`${category.id}/${course.id}`}>
+                        {category.title} — {course.title}
+                      </option>
+                    ))}
+                  </optgroup>
                 ))}
               </select>
               <input

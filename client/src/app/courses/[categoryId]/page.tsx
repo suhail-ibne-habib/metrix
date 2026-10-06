@@ -50,7 +50,7 @@ export default async function CourseCategoryPage({ params }: CategoryPageProps) 
               badge={category.badge}
               title={course.title}
               subtitle={course.subtitle}
-              cover={category.cover}
+              cover={course.cover}
               href={`/courses/${category.id}/${course.id}`}
               cta="View course"
             />
